@@ -1,8 +1,7 @@
 # CarCar
 
 Team:
-
-* Person 1 - Which microservice?
+* Ching Cheng - Automobile Service
 * LynnLyu - Auto Sales
 
 ## Design
