@@ -112,3 +112,14 @@ def api_show_appointment(request, id):
     elif request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
+
+
+@require_http_methods(["GET"])
+def api_show_appointments_by_vin(request, vin):
+    if request.method == "GET":
+        appointments = Appointment.objects.filter(vin=vin)
+        return JsonResponse(
+            appointments,
+            encoder=AppointmentDetailEncoder,
+            safe=False
+        )
