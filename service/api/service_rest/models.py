@@ -28,9 +28,9 @@ class Appointment(models.Model):
         related_name = "appointments",
         on_delete=models.CASCADE,
     )
-    reason = models.TextField()
+    reason = models.TextField(max_length=400)
     finished = models.BooleanField(default=False)
-
+    vip = models.BooleanField(default=False)
 
     def __str__(self):
         return self.vin
