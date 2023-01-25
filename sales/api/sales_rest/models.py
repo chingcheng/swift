@@ -6,6 +6,9 @@ from django.urls import reverse
 class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True, null=True)
     vin = models.CharField(max_length=17, unique=True)
+    availability = models.BooleanField(default=True)
+    def __str__(self):
+        return self.vin
 
 class SalesPerson(models.Model):
     name = models.CharField(max_length=200)
@@ -39,4 +42,6 @@ class SaleRecord(models.Model):
         on_delete=models.CASCADE,
     )
     price = models.FloatField()
-  
+
+    def __str__(self):
+        return self.automobile.vin

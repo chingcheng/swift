@@ -8,7 +8,7 @@ from .models import AutomobileVO,SalesPerson,PotentialCustomer,SaleRecord
 
 class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["import_href","vin"]
+    properties = ["import_href","vin","id"]
 
 class SalesPersonListEncoder(ModelEncoder):
     model = SalesPerson
@@ -28,9 +28,12 @@ class SaleRecordListEncoder(ModelEncoder):
         "price",
         "id",
     ]
-    def get_extra_data(self, o):
-        return {"automobile": o.automobile.vin}
-
+    encoders = {
+        "automobile": AutomobileVODetailEncoder(),
+        "salesperson": SalesPersonListEncoder(),
+        "customer": PotentialCustomerEncoder(),
+    }
+    
 
 class SaleRecordDetailEncoder(ModelEncoder):
     model = SaleRecord
@@ -43,6 +46,8 @@ class SaleRecordDetailEncoder(ModelEncoder):
     ]
     encoders = {
         "automobile": AutomobileVODetailEncoder(),
+        "salesperson": SalesPersonListEncoder(),
+        "customer": PotentialCustomerEncoder(),
     }
 
 
@@ -73,6 +78,21 @@ def api_list_salesPerson(request):
             return response
 
 
+@require_http_methods(["DELETE", "GET"])
+def api_show_salesPerson(request, pk):
+    if request.method == "GET":
+        salePerson = SalesPerson.objects.get(id=pk)
+        return JsonResponse(
+            salePerson,
+            encoder=SalesPersonListEncoder,
+            safe=False,
+        )
+    else:
+        if request.method == "DELETE":
+            count, _ = SalesPerson.objects.filter(id=pk).delete()
+            return JsonResponse({"deleted": count > 0})
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_potentialCustomer(request):
     if request.method == "GET":
@@ -81,7 +101,7 @@ def api_list_potentialCustomer(request):
         return JsonResponse(
             {"potentialCustomer": potentialCustomer},
             encoder=PotentialCustomerEncoder,
-            safef=False;
+            safe=False,
         )
     else:
         try:
@@ -101,6 +121,20 @@ def api_list_potentialCustomer(request):
             return response
 
 
+@require_http_methods(["DELETE", "GET"])
+def api_show_potentialCustomer(request, pk):
+    if request.method == "GET":
+        potentialCustomer = PotentialCustomer.objects.get(id=pk)
+        return JsonResponse(
+            potentialCustomer,
+            encoder=PotentialCustomerEncoder,
+            safe=False,
+        )
+    else:
+        if request.method == "DELETE":
+            count, _ = PotentialCustomer.objects.filter(id=pk).delete()
+            return JsonResponse({"deleted": count > 0})
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -111,49 +145,56 @@ def api_list_salesRecord(request):
         return JsonResponse(
             {"salesRecord": salesRecord},
             encoder=SaleRecordListEncoder,
-            safe=False;
+            safe=False,
         )
     else:
         # print("body",request.body)
         content = json.loads(request.body)
 
+
         # Get the Bin object and put it in the content dict
         try:
             # print(BinVO.objects.all())
 
-            automobile_href = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href=automobile_href)
+            # automobile_href = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=content["automobile"])
             content["automobile"] = automobile
-            if automobile.availability is True:
-                content["automobile"] = automobile
-                customer_name = content["customer"]
-                customer = PotentialCustomer.objects.get(name=customer_name)
-                content["customer"] = customer
-                salesperson = content["salesperson"]
-                salesperson = SalesPerson.objects.get(name=salesperson)
-                content["salesperson"] = salesperson
 
-                automobile.availability = False
-                automobile.save()
-
-                record = SaleRecord.objects.create(**content)
-                return JsonResponse(
-                    record,
-                    encoder=SaleRecordListEncoder,
-                    safe=False,
-                )
-            else:
-                response = JsonResponse(
-                    {"message": "Invalid automobile id"}
-                )
-                response.status_code = 400
-                return response
-        except:
-            response = JsonResponse(
-                {"message": "can not create the salesRecord"}
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid vin number"},
+                status = 400,
+                safe=False,
             )
-            response.status_code = 400
-            return response
+        try:
+
+            # salesperson_href = content["salesperson"]
+            salesperson = SalesPerson.objects.get(name=content["salesperson"])
+            content["salesperson"] = salesperson
+
+        except SalesPerson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid salesprson "},
+                status = 400,
+                safe=False,
+
+            )
+
+        try:
+            # customer_name = content["customer"]
+            customer = PotentialCustomer.objects.get(id=content["customer"])
+            content["customer"] = customer
+        except PotentialCustomer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid customer "},
+            )
+
+        salesRecord = SaleRecord.objects.create(**content)
+        return JsonResponse(
+            salesRecord,
+            encoder=SaleRecordListEncoder,
+            safe=False,
+        )
 
 
 
