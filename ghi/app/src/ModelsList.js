@@ -22,13 +22,14 @@ export default function ModelsList({ models }) {
                   <tr key={ model.id }>
                       <td>{ model.name }</td>
                       <td>{ model.manufacturer.name }</td>
-                      <td>
-                        <img
-                            src={model.picture_url}
-                            alt=""
-                            width="75px"
-                            height="75px"
-                        />
+                    <td>
+                    <img
+                        src={model.picture_url}
+                        className="img-fluid"
+                        alt=""
+                        width="200px"
+                        height="auto"
+                    />
                     </td>
                   </tr>
                   );
