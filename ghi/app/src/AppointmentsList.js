@@ -1,10 +1,18 @@
-export default function AppointmentsList( {appointments} ) {
-
+export default function AppointmentsList( {appointments , getAppointments } ) {
+    const cancelAppointment = async (appointment) => {
+        const url = `http://localhost:8080/api/appointments/${appointment.id}/`
+        const fetchConfig = {method: "delete"}
+        const response = await fetch(url, fetchConfig)
+        if (response.ok) {
+            getAppointments()
+        }
+    }
     if (appointments === undefined) {
         return null;
     }
 
     return (
+
         <table className="table table-striped">
             <thead>
             <tr>
@@ -14,6 +22,7 @@ export default function AppointmentsList( {appointments} ) {
                 <th>Time</th>
                 <th>Technician name</th>
                 <th>Reason</th>
+                <th>VIP</th>
             </tr>
             </thead>
             <tbody>
@@ -22,10 +31,27 @@ export default function AppointmentsList( {appointments} ) {
                 <tr key={appointment.id}>
                     <td>{ appointment.vin }</td>
                     <td>{ appointment.customer_name }</td>
-                    <td>{ appointment.date_time }</td>
-                    <td>{ appointment.date_time }</td>
+                    <td>{ new Date(appointment.date_time).toLocaleDateString("en-US") }</td>
+                    <td>{ new Date(appointment.date_time).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }) }</td>
                     <td>{ appointment.technician_name.technician_name }</td>
                     <td>{ appointment.reason }</td>
+                    <td>{ appointment.vip ? "👑": "⛔️"}</td>
+                    <td>
+                        <button
+                            id={ appointment.id } onClick={() => cancelAppointment(appointment.id)}
+                            type="button" className="btn btn-danger">
+                            Cancel
+                        </button>
+                    </td>
+                    <td>
+                        <button>
+
+                            Finished
+                        </button>
+                    </td>
                 </tr>
                 );
             })}

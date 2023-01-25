@@ -45,7 +45,7 @@ def api_appointments(request, vin=None):
             )
 
 
-@require_http_methods(["GET", "DELETE"])
+@require_http_methods(["GET", "DELETE", "PUT"])
 def api_appointment(request, id):
     if request.method == "GET":
         try:
@@ -60,9 +60,20 @@ def api_appointment(request, id):
                 {"message": "Appointment does not exist"},
                 status = 404,
             )
+
     elif request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
+
+    elif request.method =="PUT":
+        content = json.loads(request.body)
+        Appointment.objects.filter(id=id).update(**content)
+        appointment = Appointment.objects.get(id=id)
+        return JsonResponse(
+            appointment,
+            encoder = AppointmentEncoder,
+            safe = False
+        )
 
 
 @require_http_methods(["GET", "POST"])
