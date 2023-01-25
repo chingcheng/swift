@@ -68,7 +68,7 @@ export default function AppointmentForm({ getAppointments }) {
     }
 
 
-    const fetchData = async() => {
+    const fetchTechnicians = async() => {
     const url = 'http://localhost:8080/api/technicians/';
     const response = await fetch(url);
     if (response.ok) {
@@ -78,7 +78,7 @@ export default function AppointmentForm({ getAppointments }) {
     }
 
     useEffect(() => {
-        fetchData();
+      fetchTechnicians();
     }, []);
 
 

@@ -6,6 +6,7 @@ import AppointmentForm from './AppointmentForm';
 import TechnicianForm from './TechnicianForm';
 import { useEffect , useState } from 'react';
 import TechniciansList from './TechniciansList';
+import ServiceHistory from './ServiceHistory';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="appointments">
             <Route path="" element={<AppointmentsList appointments={appointments} getAppointments={getAppointments} />}/>
             <Route path="new" element={<AppointmentForm getAppointments={getAppointments} />}/>
+            <Route path="service-history"  element={<ServiceHistory appointments={appointments} setAppointments={setAppointments}/>}/>
           </Route>
           <Route path="technicians">
             <Route path="" element={<TechniciansList technicians={technicians} getTechnicians={getTechnicians} />}/>
