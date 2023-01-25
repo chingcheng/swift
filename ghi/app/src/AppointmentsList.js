@@ -1,4 +1,4 @@
-export default function AppointmentsList( {appointments , getAppointments } ) {
+export default function AppointmentsList( {appointments, getAppointments } ) {
     const cancelAppointment = async (appointment) => {
         const url = `http://localhost:8080/api/appointments/${appointment.id}/`
         const fetchConfig = {method: "delete"}
@@ -10,6 +10,9 @@ export default function AppointmentsList( {appointments , getAppointments } ) {
     if (appointments === undefined) {
         return null;
     }
+
+
+
 
     return (
 
@@ -38,17 +41,17 @@ export default function AppointmentsList( {appointments , getAppointments } ) {
                     }) }</td>
                     <td>{ appointment.technician_name.technician_name }</td>
                     <td>{ appointment.reason }</td>
-                    <td>{ appointment.vip ? "👑": "⛔️"}</td>
+                    <td>{ appointment.vip ? "👑": ""}</td>
                     <td>
                         <button
-                            id={ appointment.id } onClick={() => cancelAppointment(appointment.id)}
+                            id={ appointment.id } onClick={() => cancelAppointment(appointment)}
                             type="button" className="btn btn-danger">
                             Cancel
                         </button>
                     </td>
                     <td>
-                        <button>
-
+                        <button
+                            type="button" className="btn btn-info">
                             Finished
                         </button>
                     </td>
