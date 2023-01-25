@@ -1,4 +1,4 @@
-export default function ModelsList({ models, getModels }) {
+export default function ModelsList({ models }) {
     if (models === undefined) {
         return null
     }

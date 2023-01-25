@@ -1,13 +1,12 @@
 import React, { useEffect , useState } from 'react';
 
-export default function AppointmentForm({ getAppointments }) {
+export default function AppointmentForm({ getAppointments, technicians }) {
 
     const [vin, setVin] = useState('')
     const [customerName, setCustomerName] = useState('')
     const [dateTime, setDateTime] = useState('')
     const [technicianName, setTechnicianName] = useState('')
     const [reason, setReason] = useState('')
-    const [technicians, setTechnicians] = useState([])
 
     const handleVinChange = (event) => {
         const value = event.target.value
@@ -68,21 +67,6 @@ export default function AppointmentForm({ getAppointments }) {
         }
     }
 
-
-    const fetchTechnicians = async() => {
-    const url = 'http://localhost:8080/api/technicians/';
-    const response = await fetch(url);
-    if (response.ok) {
-        const data = await response.json();
-        setTechnicians(data.technicians)
-    }
-    }
-
-    useEffect(() => {
-      fetchTechnicians();
-    }, []);
-
-
     return (
         <div className="my-5 container">
             <div className="offset-3 col-6">
@@ -106,8 +90,8 @@ export default function AppointmentForm({ getAppointments }) {
                     <label htmlFor="reason">Reason for service</label>
                   </div>
                   <div className="mb-3">
-                    <select onChange={handleTechnicianChange} value={technicianName} placeholder="Technician name" required id="technician" name="technician_name" className="form-select">
-                    <option>Technician name</option>
+                    <select onChange={handleTechnicianChange} value={technicianName} required id="technician" name="technician_name" className="form-select">
+                    <option>Choose a technician</option>
                     {technicians.map(technician => {
                         return (
                         <option key={technician.id} value={technician.technician_name}>

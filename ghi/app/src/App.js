@@ -5,6 +5,7 @@ import Nav from './Nav';
 import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelsList from './ModelsList';
+import ModelForm from './ModelForm';
 import AppointmentsList from './AppointmentsList';
 import AppointmentForm from './AppointmentForm';
 import TechnicianForm from './TechnicianForm';
@@ -80,10 +81,11 @@ function App() {
           </Route>
           <Route path="models">
             <Route path="" element={<ModelsList models={models} getModels={getModels} />}/>
+            <Route path="new" element={<ModelForm getModels={getModels} manufacturers={manufacturers}/>}/>
           </Route>
           <Route path="appointments">
             <Route path="" element={<AppointmentsList appointments={appointments} getAppointments={getAppointments} />}/>
-            <Route path="new" element={<AppointmentForm getAppointments={getAppointments} />}/>
+            <Route path="new" element={<AppointmentForm getAppointments={getAppointments} technicians={technicians} />}/>
             <Route path="service-history"  element={<ServiceHistory appointments={appointments} setAppointments={setAppointments}/>}/>
           </Route>
           <Route path="technicians">
