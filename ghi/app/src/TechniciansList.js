@@ -14,13 +14,14 @@ export default function TechniciansList( {technicians, getTechnicians } ) {
     return (
     <>
       <div className='p-5 text-left bg-light'>
-        <h1 className='mb-3'>Technicians</h1>
+        <h1 className='mb-3 text-center'>Technicians</h1>
         </div>
         <table className="table table-striped">
             <thead>
             <tr>
                 <th>Technician name</th>
                 <th>Employee number</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>

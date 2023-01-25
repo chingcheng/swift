@@ -1,4 +1,5 @@
 export default function AppointmentsList( {appointments, getAppointments } ) {
+
     const cancelAppointment = async (appointment) => {
         const url = `http://localhost:8080/api/appointments/${appointment.id}/`
         const fetchConfig = {method: "delete"}
@@ -6,9 +7,6 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
         if (response.ok) {
             getAppointments()
         }
-    }
-    if (appointments === undefined) {
-        return null;
     }
 
     const finishAppointment = async (appointment) => {
@@ -26,22 +24,26 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
         }
     }
 
+    if (appointments === undefined) {
+        return null;
+    }
 
     return (
     <>
       <div className='p-5 text-left bg-light'>
-        <h1 className='mb-3'>Service appointments</h1>
+        <h1 className='mb-3 text-center'>Service appointments</h1>
         </div>
-        <table className="table table-striped">
+        <table className="table table-striped table-hover">
             <thead>
             <tr>
                 <th>VIN</th>
                 <th>Customer name</th>
+                <th>VIP</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Technician name</th>
                 <th>Reason</th>
-                <th>VIP</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -51,6 +53,12 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
                 <tr key={appointment.id}>
                     <td>{ appointment.vin }</td>
                     <td>{ appointment.customer_name }</td>
+                    <td>{ appointment.vip ?
+                            <img
+                            src="https://cdn-icons-png.flaticon.com/128/6941/6941697.png"
+                            width="25px"
+                            />
+                            :""}</td>
                     <td>{ new Date(appointment.date_time).toLocaleDateString("en-US") }</td>
                     <td>{ new Date(appointment.date_time).toLocaleTimeString([], {
                         hour: "2-digit",
@@ -58,7 +66,6 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
                     }) }</td>
                     <td>{ appointment.technician_name.technician_name }</td>
                     <td>{ appointment.reason }</td>
-                    <td>{ appointment.vip ? "👑": ""}</td>
                     <td>
                         <button
                             id={ appointment.id } onClick={() => cancelAppointment(appointment)}
@@ -69,7 +76,7 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
                     <td>
                         <button
                             id={ appointment.id } onClick={() => finishAppointment(appointment)}
-                            type="button" className="btn btn-info">
+                            type="button" className="btn btn-success">
                             Finished
                         </button>
                     </td>

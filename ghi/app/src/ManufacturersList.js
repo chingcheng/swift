@@ -1,4 +1,4 @@
-export default function ManufacturersList({ manufacturers, getManufacturers }) {
+export default function ManufacturersList({ manufacturers }) {
 
     if (manufacturers === undefined) {
         return null
@@ -7,9 +7,9 @@ export default function ManufacturersList({ manufacturers, getManufacturers }) {
     return (
         <>
         <div className='p-5 text-left bg-light'>
-          <h1 className='mb-3'>Manufacturers</h1>
+          <h1 className='mb-3 text-center'>Manufacturers</h1>
           </div>
-          <table className="table table-striped">
+          <table className="table table-striped table-hover">
               <thead>
               <tr>
                   <th>Name</th>

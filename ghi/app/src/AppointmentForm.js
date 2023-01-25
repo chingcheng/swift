@@ -71,7 +71,7 @@ export default function AppointmentForm({ getAppointments, technicians }) {
         <div className="my-5 container">
             <div className="offset-3 col-6">
               <div className="shadow p-4 mt-4">
-                <h1>Add a service appointment</h1>
+                <h2 className="text-center">Enter a service appointment</h2>
                 <form onSubmit={handleSubmit} id="add-appointment-form">
                   <div className="form-floating mb-3">
                     <input onChange={handleVinChange} value={vin} placeholder="VIN" required type="text" name="vin" className="form-control"/>
@@ -101,7 +101,7 @@ export default function AppointmentForm({ getAppointments, technicians }) {
                     })}
                     </select>
                   </div>
-                  <button className="btn btn-primary">Add</button>
+                  <button className="btn btn-primary">Enter</button>
                 </form>
               </div>
             </div>
