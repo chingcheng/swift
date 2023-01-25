@@ -1,26 +1,33 @@
 import { useState } from 'react';
 
 export default function ServiceHistory({ appointments, setAppointments }) {
-    const [vin, setVin] = useState('')
+    const [vinSearch, setVinSearch] = useState('')
 
     const handleSearch = async (event) => {
-        const appointmentsByVin = appointments.filter((appointment) =>
-        appointment.vin.includes(setVin)
-        )
-        setAppointments(appointmentsByVin)
+        if (vinSearch.length === 0) {
+            const vinFilteredAppointments = appointments.filter((appointment) =>
+            appointment.vin.includes(vinSearch))
+            setAppointments(vinFilteredAppointments)
+        }
+        else {
+            event.preventDefault()
+            const vinFilteredAppointments = appointments.filter((appointment) =>
+            appointment.vin.includes(vinSearch))
+            setAppointments(vinFilteredAppointments)
+        }
     }
     const handleSearchInput = async (event) => {
         const value = event.target.value
-        setVin(value)
+        setVinSearch(value)
     }
-    console.log(appointments)
+
     return (
         <>
           <form onSubmit={handleSearch} className="input-group mb-3 mt-3">
             <input onChange={handleSearchInput} type="search" className="form-control rounded" placeholder="Search by VIN" aria-label="Search" aria-describedby="search-addon" />
             <button type="submit" className="btn btn-primary">search</button>
             </form>
-            <h1 className="mb-3 mt-3">Service History</h1>
+            <h1 className="mb-3 mt-3 text-center">Service History</h1>
           <table className="table table-striped">
               <thead>
               <tr>

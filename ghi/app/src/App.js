@@ -12,7 +12,7 @@ import ServiceHistory from './ServiceHistory';
 function App() {
   const [appointments, setAppointments] = useState([])
   const getAppointments = async () => {
-    const url= 'http://localhost:8080/api/appointments/'
+    const url = 'http://localhost:8080/api/appointments/'
     const response = await fetch(url)
 
     if (response.ok) {
@@ -25,7 +25,7 @@ function App() {
 
   const [technicians, setTechnicians] = useState([])
   const getTechnicians = async () => {
-    const url= 'http://localhost:8080/api/technicians/'
+    const url = 'http://localhost:8080/api/technicians/'
     const response = await fetch(url)
 
     if (response.ok) {
