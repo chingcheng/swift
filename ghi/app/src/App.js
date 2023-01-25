@@ -2,13 +2,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect , useState } from 'react';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import ManufacturersList from './ManufacturersList';
+import ManufacturerForm from './ManufacturerForm';
+import ModelsList from './ModelsList';
 import AppointmentsList from './AppointmentsList';
 import AppointmentForm from './AppointmentForm';
 import TechnicianForm from './TechnicianForm';
 import TechniciansList from './TechniciansList';
 import ServiceHistory from './ServiceHistory';
-import ManufacturersList from './ManufacturersList';
-import ModelsList from './ModelsList';
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers">
             <Route path="" element={<ManufacturersList manufacturers={manufacturers} getManufacturers={getManufacturers} />} />
+            <Route path="new" element={<ManufacturerForm getManufacturers={getManufacturers} />}/>
           </Route>
           <Route path="models">
             <Route path="" element={<ModelsList models={models} getModels={getModels} />}/>

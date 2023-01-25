@@ -1,6 +1,7 @@
 import React, { useEffect , useState } from 'react';
 
 export default function AppointmentForm({ getAppointments }) {
+
     const [vin, setVin] = useState('')
     const [customerName, setCustomerName] = useState('')
     const [dateTime, setDateTime] = useState('')
