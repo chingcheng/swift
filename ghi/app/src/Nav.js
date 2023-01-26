@@ -84,7 +84,8 @@ function Nav() {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li><NavLink className="dropdown-item" aria-current="page" to="/salesrecords">List of sales records</NavLink></li>
-                  <li><NavLink className="dropdown-item" aria-current="page" to="/manufacturers/new/">Create a sales record</NavLink></li>
+                  <li><NavLink className="dropdown-item" aria-current="page" to="/salesrecords/new/">Create a sales record</NavLink></li>
+                  <li><NavLink className="dropdown-item" aria-current="page" to="/salesrecords/history/">Sales person history</NavLink></li>
                 </ul>
               </li>
             </ul>
@@ -96,8 +97,19 @@ function Nav() {
                   Salespeople
                 </a>
                 <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><NavLink className="dropdown-item" aria-current="page" to="/salesperson">List of salespeople</NavLink></li>
                   <li><NavLink className="dropdown-item" aria-current="page" to="/salesperson/new/">Create a salesperson</NavLink></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul className="navbar-nav">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Customer
+                </a>
+                <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><NavLink className="dropdown-item" aria-current="page" to="/customer/new/">Create a customer</NavLink></li>
                 </ul>
               </li>
             </ul>
