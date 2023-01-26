@@ -1,6 +1,6 @@
 export default function ModelsList({ models, getModels }) {
     const deleteModel = async (model) => {
-        const url = `http://localhost:8080/api/appointments/${model.id}/`
+        const url = `http://localhost:8100/api/models/${model.id}/`
         const fetchConfig = {method: "delete"}
         const response = await fetch(url, fetchConfig)
         if (response.ok) {
