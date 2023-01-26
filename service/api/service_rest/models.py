@@ -32,3 +32,6 @@ class Appointment(models.Model):
 
     def __str__(self):
         return self.vin
+
+    class Meta:
+        ordering = ['-date_time']
