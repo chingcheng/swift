@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState } from 'react'
 
 function SalesRecordForm(props) {
 
     const [formAutomobile, setFormAutomobile] = useState('');
-    const [formAutomobiles, setFormAutomobiles] = useState([])
-
     const [formSalesperson, setFormSalesperson] = useState('');
     const [formCustomer, setFormCustomer] = useState('');
     const [formPrice, setFormPrice] = useState("");
-
 
    const handleAutomobileChange = (event) => {
         const value = event.target.value;
@@ -30,18 +27,6 @@ function SalesRecordForm(props) {
         setFormPrice(value);
     }
 
-
-    const fetchAutomobiles = async () => {
-      const url = 'http://localhost:8090/api/automobiles/';
-      const response = await fetch(url);
-
-      if (response.ok) {
-      const data = await response.json();
-      setFormAutomobiles(data.automobiles)
-      }
-  }
-
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
@@ -60,24 +45,16 @@ function SalesRecordForm(props) {
         };
 
         const response = await fetch(salesRecordUrl, fetchOptions);
-
         if (response.ok) {
             const salesRecord = await response.json();
             setFormAutomobile("");
             setFormSalesperson("");
             setFormCustomer("");
             setFormPrice("");
-            props.fetchAutomobiles()
             props.fetchSalesRecord()
-            setFormAutomobiles()
-            props.updateUnsold()
+            props.fetchAutomobiles()
         }
-
     }
-
-    useEffect(() => {
-      fetchAutomobiles();
-      }, []);
 
     return (
       <div className="row">
@@ -88,13 +65,14 @@ function SalesRecordForm(props) {
               <div className="mb-3">
                 <select onChange={handleAutomobileChange} value={formAutomobile} required id="automobile" name="automobile" className="form-select">
                     <option value="">Choose a automobile</option>
-                    {props.unsold.map(automobile => {
+                    {props.automobiles.map(automobile => {
+                      if (automobile.availability === true) {
                         return (
                             <option key={automobile.id} value={automobile.vin}>
                             {automobile.vin}
                             </option>
                         );
-                      }
+                      }}
                     )}
                 </select>
               </div>

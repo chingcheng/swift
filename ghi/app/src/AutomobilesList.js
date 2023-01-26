@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 
 const AutomobileList = () => {
 	const [automobileList, setAutomobileList] = useState([]);
+
     const fetchAutomobileList = async () => {
         const automobileListUrl = "http://localhost:8100/api/automobiles/";
         const  automobileListResponse = await fetch(automobileListUrl);
+
         if (automobileListResponse.ok){
             const data = await automobileListResponse.json();
-
             const automobileList = data.autos;
             setAutomobileList(automobileList);
         }
     }
+
 	useEffect(() => {
 		fetchAutomobileList();
 	}, []);

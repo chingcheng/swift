@@ -28,18 +28,8 @@ function App() {
   const [appointments, setAppointments] = useState([])
   const [salesperson, setSalesperson] = useState([])
   const [customer, setCustomer] = useState([])
-  const [salesrecord,setSalesrecord] = useState([])
-  const [unsold, setUnsold] = useState([])
+  const [salesrecords,setSalesrecords] = useState([])
 
-  const updateUnsold = async () => {
-    const url = 'http://localhost:8090/api/automobiles/'
-    const response = await fetch(url)
-    if (response.ok) {
-      const data = await response.json()
-      setAutomobiles(data.automobiles)
-      setUnsold(data.automobiles.filter(automobile => automobile.availability === true))
-    }
-  }
 
   const getManufacturers = async () => {
     const url = 'http://localhost:8100/api/manufacturers/'
@@ -66,6 +56,7 @@ function App() {
   const fetchAutomobiles = async () => {
     const url = 'http://localhost:8090/api/automobiles/'
     const response = await fetch(url)
+
     if (response.ok) {
       const data = await response.json()
       setAutomobiles(data.automobiles)
@@ -97,6 +88,7 @@ function App() {
   const fetchSalesperson = async () => {
     const url = 'http://localhost:8090/api/salesperson/'
     const response = await fetch(url)
+
     if (response.ok) {
       const data = await response.json()
       setSalesperson(data.salesPerson)
@@ -106,6 +98,7 @@ function App() {
   const fetchCustomer = async () => {
     const url = 'http://localhost:8090/api/potentialcustomer/'
     const response = await fetch(url)
+
     if (response.ok) {
       const data = await response.json()
       setCustomer(data.potentialCustomer)
@@ -115,10 +108,11 @@ function App() {
   const fetchSalesRecord = async () => {
     const salesrecordUrl = "http://localhost:8090/api/salesrecord/"
     const salesrecordResponse = await fetch(salesrecordUrl)
+
     if (salesrecordResponse.ok){
         const data = await salesrecordResponse.json()
-        const salesrecord = data.salesRecord
-        setSalesrecord(salesrecord)
+        const salesrecords = data.salesRecord
+        setSalesrecords(salesrecords)
     }
   }
 
@@ -131,8 +125,8 @@ function App() {
     fetchSalesperson()
     fetchCustomer()
     fetchSalesRecord()
-    updateUnsold()
   }, [])
+
 
   return (
     <BrowserRouter>
@@ -152,6 +146,11 @@ function App() {
             <Route path="new" element={<ModelForm getModels={getModels} manufacturers={manufacturers}/>}/>
           </Route>
 
+          <Route path="automobiles">
+            <Route path="" element={<AutomobileList />} />
+            <Route path="new" element={<AutomobileForm fetchAutomobiles={fetchAutomobiles} models={models}/>} />
+          </Route>
+
           <Route path="appointments">
             <Route path="" element={<AppointmentsList appointments={appointments} getAppointments={getAppointments} />}/>
             <Route path="new" element={<AppointmentForm getAppointments={getAppointments} technicians={technicians} />}/>
@@ -163,9 +162,10 @@ function App() {
             <Route path="new" element={<TechnicianForm getTechnicians={getTechnicians}/>} />
           </Route>
 
-          <Route path="automobiles">
-            <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<AutomobileForm fetchAutomobiles={fetchAutomobiles} updateUnsold={updateUnsold}/>} />
+          <Route path="salesrecords">
+            <Route path="" element={<SalesRecordList salesrecord={salesrecords} />} />
+            <Route path="new" element={<SalesRecordForm automobiles={automobiles} salesperson={salesperson} customer={customer} fetchSalesRecord={fetchSalesRecord} fetchAutomobiles={fetchAutomobiles}/>} />
+            <Route path="history" element={<SalesRecordHistory salesrecords={salesrecords} salesperson={salesperson}/>} />
           </Route>
 
           <Route path="salesperson">
@@ -174,12 +174,7 @@ function App() {
           <Route path="customer">
             <Route path="new" element={<CustomerForm fetchCustomer={fetchCustomer}/>} />
           </Route>
-          <Route path="salesrecords">
-            <Route path="" element={<SalesRecordList salesrecord={salesrecord} />} />
-            <Route path="new" element={<SalesRecordForm automobiles={automobiles} salesperson={salesperson} customer={customer} fetchSalesRecord={fetchSalesRecord} fetchAutomobiles={fetchAutomobiles} updateUnsold={updateUnsold} unsold={unsold}/>} />
-            <Route path="history" element={<SalesRecordHistory salesrecord={salesrecord} salesperson={salesperson}/>} />
 
-          </Route>
         </Routes>
       </div>
     </BrowserRouter>

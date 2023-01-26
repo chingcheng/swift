@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function AutomobileForm({fetchAutomobiles, updateUnsold}) {
+export default function AutomobileForm({fetchAutomobiles, updateUnsold, models}) {
 	const [color, setColor] = useState("");
 	const [year, setYear] = useState("");
 	const [vin, setVin] = useState("");
-	const [models, setModels] = useState([]);
 	const [model, setModel] = useState("");
 
     const handleColorChange = (event) => {
@@ -12,7 +11,7 @@ export default function AutomobileForm({fetchAutomobiles, updateUnsold}) {
         setColor(value);
     }
 
-    const handleNYdearChange = (event) => {
+    const handleYearChange = (event) => {
         const value = event.target.value;
         setYear(value);
     }
@@ -57,19 +56,6 @@ export default function AutomobileForm({fetchAutomobiles, updateUnsold}) {
         }
     }
 
-    const fetchModels = async () => {
-        const url = 'http://localhost:8100/api/models/';
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setModels(data.models)
-        }
-    }
-
-    useEffect(() => {
-        fetchModels();
-    }, []);
-
 	return (
         <div className="row">
             <div className="offset-3 col-6">
@@ -81,7 +67,7 @@ export default function AutomobileForm({fetchAutomobiles, updateUnsold}) {
                     <label htmlFor="color">Color</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input value={year} onChange={handleNYdearChange} placeholder="Year" required type="number" name="year" id="year" className="form-control" />
+                    <input value={year} onChange={handleYearChange} placeholder="Year" required type="number" name="year" id="year" className="form-control" />
                     <label htmlFor="year">Year</label>
                   </div>
                   <div className="form-floating mb-3">

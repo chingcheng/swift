@@ -9,14 +9,14 @@ function CustomerForm({fetchCustomer}) {
         const value = event.target.value
         setName(value);
     }
+
     const handleChangeAddress = (event) => {
         const value = event.target.value
-
         setAddress(value);
     }
+
     const handlePhoneNumber = (event) => {
         const value = event.target.value
-
         setPhoneNumber(value);
     }
 

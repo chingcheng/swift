@@ -25,9 +25,9 @@ export default function ManufacturerForm({ getManufacturers }) {
         };
 
         const response = await fetch(url, fetchConfig);
+
         if (response.ok) {
           const appointment = await response.json();
-
           setName('');
           getManufacturers()
         }

@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from "react";
-
-function SalesRecordList(salesrecord) {
-    // async function deleteShoes(id) {
-    //     const url = "http://localhost:8080/api/shoes/${id}";
-    //     const fetchConfig = {
-    //         method: "DELETE",
-    //     }
-    //     const response = await fetch(url, fetchConfig);
-    //     return fetchShoes(response);
-
-    // }
+function SalesRecordList(salesrecords) {
+    if (salesrecords === undefined) {
+        return null
+    }
 
   return (
     <div className="atable table-striped">
@@ -32,14 +24,14 @@ function SalesRecordList(salesrecord) {
                 </tr>
             </thead>
             <tbody>
-                {salesrecord.salesrecord.map(salesrecords => {
+                {salesrecords.salesrecord.map(salesrecord => {
                     return (
-                        <tr key={salesrecords.id}>
-                            <td>{salesrecords.salesperson.name}</td>
-                            <td>{salesrecords.salesperson.employee_number}</td>
-                            <td>{salesrecords.customer.name}</td>
-                            <td>{salesrecords.automobile.vin}</td>
-                            <td>{salesrecords.price}</td>
+                        <tr key={salesrecord.id}>
+                            <td>{salesrecord.salesperson.name}</td>
+                            <td>{salesrecord.salesperson.employee_number}</td>
+                            <td>{salesrecord.customer.name}</td>
+                            <td>{salesrecord.automobile.vin}</td>
+                            <td>{salesrecord.price}</td>
                         </tr>
                     );
                 })}
