@@ -14,7 +14,7 @@ export default function ModelsList({ models, getModels }) {
 
     return (
         <>
-        <div className='p-5 text-left bg-light'>
+        <div className='p-5 text-left'>
           <h1 className='mb-3 text-center'>Vehicle Models</h1>
           </div>
           <table className="table table-striped table-hover">
