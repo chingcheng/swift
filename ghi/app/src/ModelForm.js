@@ -41,7 +41,6 @@ export default function ModelForm({ getModels, manufacturers }) {
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
           const appointment = await response.json();
-          console.log(appointment);
 
           setName('')
           setPictureUrl('')

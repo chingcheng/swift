@@ -20,7 +20,6 @@ export default function TechnicianForm({ getTechnicians }) {
         const data = {}
         data.technician_name = technicianName
         data.employee_number = employeeNumber
-        console.log(data)
 
         const url = 'http://localhost:8080/api/technicians/';
         const fetchConfig = {
@@ -34,7 +33,6 @@ export default function TechnicianForm({ getTechnicians }) {
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
           const appointment = await response.json();
-          console.log(appointment);
 
           setTechnicianName('');
           setEmployeeNumber('');
