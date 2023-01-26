@@ -77,7 +77,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<MainPage />} />
-          
+
           <Route path="automobiles">
             <Route path="" element={<AutomobileList />} />
             <Route path="new" element={<AutomobileForm />} />
@@ -92,7 +92,7 @@ function App() {
           <Route path="salesrecord">
             <Route path="" element={<SalesRecordList salesrecord={salesrecord} />} />
             <Route path="new" element={<SalesRecordForm automobile={automobile} salesperson={salesperson} customer={customer} />} />
-            <Route path="history" element={<SalesRecordHistory salesrecord={salesrecord}/>} />
+            <Route path="history" element={<SalesRecordHistory salesrecord={salesrecord} salesperson={salesperson}/>} />
 
           </Route>
         </Routes>
