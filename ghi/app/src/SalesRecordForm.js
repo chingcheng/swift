@@ -62,7 +62,6 @@ function SalesRecordForm(props) {
         };
 
         const response = await fetch(salesRecordUrl, fetchOptions);
-        // console.log(response)
 
         if (response.ok) {
             const salesRecord = await response.json();
@@ -81,7 +80,6 @@ function SalesRecordForm(props) {
 
 
 
-    // console.log(props.automobile)
 
     return (
       <div className="row">

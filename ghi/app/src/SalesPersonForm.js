@@ -26,7 +26,6 @@ function SalesPersonForm() {
       };
 
       const salespersonResponse = await fetch(salespersonUrl, fetchOptions);
-      console.log(salespersonResponse)
 
       if (salespersonResponse.ok) {
         const salesperson = await salespersonResponse.json();

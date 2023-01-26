@@ -37,7 +37,6 @@ function CustomerForm() {
       };
 
       const customerResponse = await fetch(customerUrl,fetchOptions);
-      console.log(customerResponse)
 
       if (customerResponse.ok) {
         const customer = await customerResponse.json();

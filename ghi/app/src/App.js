@@ -55,10 +55,7 @@ function App() {
       setCustomer(data.potentialCustomer)
       }
   }
-  // console.log("customer: ",customer)
-  // console.log("salesperson: ",salesperson)
-  // console.log("automobile: ",automobile)
-  // console.log("salesrecord: ",salesrecord)
+
 
 
   useEffect(() => {
