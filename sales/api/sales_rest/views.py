@@ -8,7 +8,7 @@ from .models import AutomobileVO,SalesPerson,PotentialCustomer,SaleRecord
 
 class AutomobileVODetailEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["import_href","vin","id"]
+    properties = ["import_href","vin","id","availability"]
 
 class SalesPersonListEncoder(ModelEncoder):
     model = SalesPerson
@@ -33,7 +33,7 @@ class SaleRecordListEncoder(ModelEncoder):
         "salesperson": SalesPersonListEncoder(),
         "customer": PotentialCustomerEncoder(),
     }
-    
+
 
 class SaleRecordDetailEncoder(ModelEncoder):
     model = SaleRecord
@@ -51,13 +51,36 @@ class SaleRecordDetailEncoder(ModelEncoder):
     }
 
 
+@require_http_methods(["GET"])
+def api_list_automobile(request):
+    if request.method == "GET":
+        automobiles = AutomobileVO.objects.all()
+        return JsonResponse(
+            {"automobiles": automobiles},
+            encoder=AutomobileVODetailEncoder,
+            safe=False,
+        )
+
+
+@require_http_methods(["PUT"])
+def api_update_automobile(request, vin):
+    if request.method == "PUT":
+        automobile = AutomobileVO.objects.filter(vin=vin).update(availability=False)
+        automobile.save()
+        return JsonResponse(
+                automobile,
+                encoder=AutomobileVODetailEncoder,
+                safe=False,
+            )
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_salesPerson(request):
     if request.method == "GET":
         salesPerson = SalesPerson.objects.all()
 
         return JsonResponse(
-            {"salesRecord": salesPerson},
+            {"salesPerson": salesPerson},
             encoder=SalesPersonListEncoder,
         )
     else:
@@ -158,7 +181,9 @@ def api_list_salesRecord(request):
 
             # automobile_href = content["automobile"]
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
-            content["automobile"] = automobile
+            if automobile.availability is True:
+                # try:
+                    content["automobile"] = automobile
 
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
@@ -169,8 +194,9 @@ def api_list_salesRecord(request):
         try:
 
             # salesperson_href = content["salesperson"]
-            salesperson = SalesPerson.objects.get(name=content["salesperson"])
-            content["salesperson"] = salesperson
+                # try:
+                salesperson = SalesPerson.objects.get(id=content["salesperson"])
+                content["salesperson"] = salesperson
 
         except SalesPerson.DoesNotExist:
             return JsonResponse(
@@ -182,19 +208,34 @@ def api_list_salesRecord(request):
 
         try:
             # customer_name = content["customer"]
+                # try:
             customer = PotentialCustomer.objects.get(id=content["customer"])
             content["customer"] = customer
+            automobile.availability = False
+            automobile.save()
+
+
+            salesRecord = SaleRecord.objects.create(**content)
+            return JsonResponse(
+                salesRecord,
+                encoder=SaleRecordListEncoder,
+                safe=False,
+            )
         except PotentialCustomer.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid customer "},
             )
 
-        salesRecord = SaleRecord.objects.create(**content)
-        return JsonResponse(
-            salesRecord,
-            encoder=SaleRecordListEncoder,
-            safe=False,
-        )
+
+
+        # except:
+            # response = JsonResponse(
+            #     {"message": "The car is not avaible"}
+            # )
+            # response.status_code = 400
+            # return response
+
+
 
 
 

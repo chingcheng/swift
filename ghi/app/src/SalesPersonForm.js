@@ -10,7 +10,6 @@ function SalesPersonForm() {
     const handleChangeEmployeeNumber = (event) => {
         setEmployeeNumber(event.target.value);
     }
-
     const handleSubmit = async (event) => {
       event.preventDefault();
       const data = {};
