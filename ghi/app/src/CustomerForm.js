@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 
-function CustomerForm() {
+function CustomerForm({fetchCustomer}) {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
-    const [phone_number, setPhone_number] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
 
     const handleChangeName = (event) => {
         const value = event.target.value
@@ -17,7 +17,7 @@ function CustomerForm() {
     const handlePhoneNumber = (event) => {
         const value = event.target.value
 
-        setPhone_number(value);
+        setPhoneNumber(value);
     }
 
     const handleSubmit = async (event) => {
@@ -25,7 +25,7 @@ function CustomerForm() {
       const data = {};
       data.name = name;
       data.address = address;
-      data.phone_number = phone_number;
+      data.phone_number = phoneNumber;
 
       const customerUrl = 'http://localhost:8090/api/potentialcustomer/';
       const fetchOptions = {
@@ -42,7 +42,8 @@ function CustomerForm() {
         const customer = await customerResponse.json();
         setName("");
         setAddress("");
-        setPhone_number("");
+        setPhoneNumber("");
+        fetchCustomer()
       }
     }
 
@@ -57,11 +58,11 @@ function CustomerForm() {
                             <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handleChangeAddress}  placeholder="Address" required type="text" name="address" id="address" className="form-control"/>
+                            <input onChange={handleChangeAddress}  value={address} placeholder="Address" required type="text" name="address" id="address" className="form-control"/>
                             <label htmlFor="address">Address</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handlePhoneNumber}  placeholder="Phone Number" required type="text" name="phone_number" id="phone_number" className="form-control"/>
+                            <input onChange={handlePhoneNumber}  value={phoneNumber} placeholder="Phone Number" required type="text" name="phone_number" id="phone_number" className="form-control"/>
                             <label htmlFor="phone_number">Phone Number</label>
                         </div>
                         <button className="btn btn-primary">Create</button>

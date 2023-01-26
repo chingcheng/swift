@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 
-function SalesPersonForm() {
+function SalesPersonForm({fetchSalesperson}) {
     const [name, setName] = useState('');
-    const [employee_number, setEmployeeNumber] = useState("");
+    const [employeeNumber, setEmployeeNumber] = useState("");
 
     const handleChangeName = (event) => {
         setName(event.target.value);
@@ -14,7 +14,7 @@ function SalesPersonForm() {
       event.preventDefault();
       const data = {};
       data.name = name;
-      data.employee_number = employee_number;
+      data.employee_number = employeeNumber;
 
       const salespersonUrl = 'http://localhost:8090/api/salesperson/';
       const fetchOptions = {
@@ -31,6 +31,7 @@ function SalesPersonForm() {
         const salesperson = await salespersonResponse.json();
         setName("");
         setEmployeeNumber("");
+        fetchSalesperson()
       }
     }
 
@@ -45,7 +46,7 @@ function SalesPersonForm() {
                             <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={handleChangeEmployeeNumber}  placeholder="Employee Number" required type="text" name="employee_number" id="employee_number" className="form-control"/>
+                            <input onChange={handleChangeEmployeeNumber} value={employeeNumber} placeholder="Employee Number" required type="text" name="employee_number" id="employee_number" className="form-control"/>
                             <label htmlFor="employee_number">Employee Number</label>
                         </div>
                         <button className="btn btn-primary">Create</button>

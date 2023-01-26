@@ -23,13 +23,23 @@ import SalesRecordList from './SalesRecordList';
 function App() {
   const [manufacturers, setManufacturers] = useState([])
   const [models, setModels] = useState([])
-  const [automobile, setAutomobile] = useState([])
+  const [automobiles, setAutomobiles] = useState([])
   const [technicians, setTechnicians] = useState([])
   const [appointments, setAppointments] = useState([])
   const [salesperson, setSalesperson] = useState([])
   const [customer, setCustomer] = useState([])
   const [salesrecord,setSalesrecord] = useState([])
+  const [unsold, setUnsold] = useState([])
 
+  const updateUnsold = async () => {
+    const url = 'http://localhost:8090/api/automobiles/'
+    const response = await fetch(url)
+    if (response.ok) {
+      const data = await response.json()
+      setAutomobiles(data.automobiles)
+      setUnsold(data.automobiles.filter(automobile => automobile.availability === true))
+    }
+  }
 
   const getManufacturers = async () => {
     const url = 'http://localhost:8100/api/manufacturers/'
@@ -58,8 +68,7 @@ function App() {
     const response = await fetch(url)
     if (response.ok) {
       const data = await response.json()
-
-      setAutomobile(data.automobiles)
+      setAutomobiles(data.automobiles)
       }
   }
 
@@ -122,6 +131,7 @@ function App() {
     fetchSalesperson()
     fetchCustomer()
     fetchSalesRecord()
+    updateUnsold()
   }, [])
 
   return (
@@ -155,18 +165,18 @@ function App() {
 
           <Route path="automobiles">
             <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<AutomobileForm />} />
+            <Route path="new" element={<AutomobileForm fetchAutomobiles={fetchAutomobiles} updateUnsold={updateUnsold}/>} />
           </Route>
 
           <Route path="salesperson">
-            <Route path="new" element={<SalesPersonForm />} />
+            <Route path="new" element={<SalesPersonForm fetchSalesperson={fetchSalesperson}/>} />
           </Route>
           <Route path="customer">
-            <Route path="new" element={<CustomerForm />} />
+            <Route path="new" element={<CustomerForm fetchCustomer={fetchCustomer}/>} />
           </Route>
           <Route path="salesrecords">
             <Route path="" element={<SalesRecordList salesrecord={salesrecord} />} />
-            <Route path="new" element={<SalesRecordForm automobile={automobile} salesperson={salesperson} customer={customer} />} />
+            <Route path="new" element={<SalesRecordForm automobiles={automobiles} salesperson={salesperson} customer={customer} fetchSalesRecord={fetchSalesRecord} fetchAutomobiles={fetchAutomobiles} updateUnsold={updateUnsold} unsold={unsold}/>} />
             <Route path="history" element={<SalesRecordHistory salesrecord={salesrecord} salesperson={salesperson}/>} />
 
           </Route>

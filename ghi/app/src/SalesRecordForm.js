@@ -2,39 +2,37 @@ import React, {useEffect, useState} from 'react'
 
 function SalesRecordForm(props) {
 
+    const [formAutomobile, setFormAutomobile] = useState('');
+    const [formAutomobiles, setFormAutomobiles] = useState([])
 
-    const [formautomobile, setformautomobile] = useState('');
-    const [formautomobiles, setFormAutomobiles] = useState([])
-
-    const [formsalesperson, setformsalesperson] = useState('');
-    const [formcustomer, setformcustomer] = useState('');
-    const [formprice, setformprice] = useState("");
+    const [formSalesperson, setFormSalesperson] = useState('');
+    const [formCustomer, setFormCustomer] = useState('');
+    const [formPrice, setFormPrice] = useState("");
 
 
    const handleAutomobileChange = (event) => {
         const value = event.target.value;
-        setformautomobile(value);
+        setFormAutomobile(value);
     }
 
-    const handleSalesPersonChange = (event) => {
+    const handleSalespersonChange = (event) => {
         const value = event.target.value;
-        setformsalesperson(value);
+        setFormSalesperson(value);
     }
 
     const handleCustomerChange = (event) => {
         const value = event.target.value;
-        setformcustomer(value);
+        setFormCustomer(value);
     }
 
     const handlePriceChange = (event) => {
         const value = event.target.value;
-        setformprice(value);
+        setFormPrice(value);
     }
 
 
     const fetchAutomobiles = async () => {
       const url = 'http://localhost:8090/api/automobiles/';
-
       const response = await fetch(url);
 
       if (response.ok) {
@@ -47,10 +45,10 @@ function SalesRecordForm(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
-        data.salesperson = formsalesperson;
-        data.automobile = formautomobile;
-        data.customer = formcustomer;
-        data.price = formprice;
+        data.salesperson = formSalesperson;
+        data.automobile = formAutomobile;
+        data.customer = formCustomer;
+        data.price = formPrice;
 
         const salesRecordUrl = 'http://localhost:8090/api/salesrecord/';
         const fetchOptions = {
@@ -65,11 +63,14 @@ function SalesRecordForm(props) {
 
         if (response.ok) {
             const salesRecord = await response.json();
-            setformautomobile("");
-            setformsalesperson("");
-            setformcustomer("");
-            setformprice("");
-
+            setFormAutomobile("");
+            setFormSalesperson("");
+            setFormCustomer("");
+            setFormPrice("");
+            props.fetchAutomobiles()
+            props.fetchSalesRecord()
+            setFormAutomobiles()
+            props.updateUnsold()
         }
 
     }
@@ -78,9 +79,6 @@ function SalesRecordForm(props) {
       fetchAutomobiles();
       }, []);
 
-
-
-
     return (
       <div className="row">
         <div className="offset-3 col-6">
@@ -88,22 +86,20 @@ function SalesRecordForm(props) {
             <h1>Create a sales record</h1>
             <form onSubmit={handleSubmit} id="create-salesrecord-form">
               <div className="mb-3">
-                <select onChange={handleAutomobileChange} required id="automobile" name="automobile" className="form-select">
+                <select onChange={handleAutomobileChange} value={formAutomobile} required id="automobile" name="automobile" className="form-select">
                     <option value="">Choose a automobile</option>
-                    {/* {props.automobile.} */}
-                    {formautomobiles.map(automobile => {
-                      if (automobile.availability === true) {
+                    {props.unsold.map(automobile => {
                         return (
                             <option key={automobile.id} value={automobile.vin}>
                             {automobile.vin}
                             </option>
                         );
                       }
-                    })}
+                    )}
                 </select>
               </div>
               <div className="mb-3">
-                <select onChange={handleSalesPersonChange} required id="salesperson"  name="salesperson" className="form-select">
+                <select onChange={handleSalespersonChange} value={formSalesperson} required id="salesperson"  name="salesperson" className="form-select">
                     <option value="">Choose a salesperson</option>
                     {props.salesperson.map(salesperson => {
                         return (
@@ -116,7 +112,7 @@ function SalesRecordForm(props) {
               </div>
 
               <div className="mb-3">
-                <select onChange={handleCustomerChange} required id="customer"  name="customer" className="form-select">
+                <select onChange={handleCustomerChange} value={formCustomer} required id="customer"  name="customer" className="form-select">
                     <option value="">Choose a customer</option>
                     {props.customer.map(customer => {
                         return (
@@ -129,7 +125,7 @@ function SalesRecordForm(props) {
               </div>
 
               <div className="form-floating mb-3">
-                    <input onChange={handlePriceChange}  placeholder="price" required type="number" name="price" id="price" className="form-control"/>
+                    <input onChange={handlePriceChange} value={formPrice} placeholder="price" required type="number" name="price" id="price" className="form-control"/>
                     <label htmlFor="price">Price</label>
               </div>
               <button className="btn btn-primary">Create</button>

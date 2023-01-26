@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 
-export default function AutomobileForm() {
+export default function AutomobileForm({fetchAutomobiles, updateUnsold}) {
 	const [color, setColor] = useState("");
 	const [year, setYear] = useState("");
 	const [vin, setVin] = useState("");
 	const [models, setModels] = useState([]);
 	const [model, setModel] = useState("");
-
-
 
     const handleColorChange = (event) => {
         const value = event.target.value;
@@ -54,19 +52,20 @@ export default function AutomobileForm() {
 			setYear("");
 			setVin("");
 			setModel("");
+            fetchAutomobiles()
+            updateUnsold()
         }
     }
 
     const fetchModels = async () => {
         const url = 'http://localhost:8100/api/models/';
-
         const response = await fetch(url);
-
         if (response.ok) {
             const data = await response.json();
             setModels(data.models)
         }
     }
+
     useEffect(() => {
         fetchModels();
     }, []);
