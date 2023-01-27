@@ -5,7 +5,6 @@ Team:
 <tr>
 <td>
 * Ching Cheng - Automobile Service
-
 * Lynn Lyu - Auto Sales
 </td>
 </tr>
@@ -30,9 +29,6 @@ The inventory domain allows you to view, add, update, and delete manufacturers, 
 ## Context Map
 
 ![diagram](/img/CarCarContextMap.jpg)
-
-
-
 
 ## Getting Started
 
@@ -112,6 +108,24 @@ Sales microservice has four models: AutomobileVO, SalesPerson, PotentialCustomer
 
 ### JSON body Examples for Post Requests
 
+#### POST request to http://localhost:8090/api/salesperson/
+```sh
+{
+    "name": "David W",
+    "employee_number": 1078
+}
+```
+
+#### POST request to http://localhost:8090/api/potentialcustomer/
+```sh
+{
+    "name": "Alex J",
+    "address": "alex st",
+    "phone_number": 5851234890
+
+}
+```
+
 #### POST request to http://localhost:8090/api/salesrecord/
 ```sh
 {
@@ -119,21 +133,5 @@ Sales microservice has four models: AutomobileVO, SalesPerson, PotentialCustomer
 	"salesperson": "Flower H",
 	"customer":"5",
 	"price": 1999
-}
-```
-#### POST request to http://localhost:8090/api/salesrecord/
-```sh
-{"name": "David W",
- "employee_number": 1078
-}
-```
-
-
-#### POST request to http://localhost:8090/api/potentialcustomer/
-```sh
-{"name": "Alex J",
- "address": "alex st",
- "phone_number": 5851234890
-
 }
 ```
