@@ -5,6 +5,7 @@ Team:
 <tr>
 <td>
 
+
 * Ching Cheng -  Service Microservice
 
 * Lynn Lyu - Sales Microservice
@@ -133,8 +134,8 @@ Sales microservice has four models: AutomobileVO, SalesPerson, PotentialCustomer
 ```sh
 {
     "automobile": "4Y1SL65848Z411439",
-	"salesperson": "Flower H",
-	"customer":"5",
-	"price": 1999
+    "salesperson": "Flower H",
+    "customer":"5",
+    "price": 1999
 }
 ```
