@@ -52,7 +52,6 @@ export default function AutomobileForm({fetchAutomobiles, updateUnsold, models})
 			setVin("");
 			setModel("");
             fetchAutomobiles()
-            updateUnsold()
         }
     }
 
