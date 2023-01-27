@@ -75,19 +75,19 @@ The service microservice includes the following models: AutomobileVO, Technician
 #### POST request to http://localhost:8080/api/technicians/
 ```sh
  {
-	"technician_name": "Arthur the technician",
-	"employee_number": 525
+    "technician_name": "Arthur the technician",
+    "employee_number": 525
 }
 ```
 
 #### POST request to http://localhost:8080/api/appointments/
 ```sh
 {
-	"vin": "1ZVBP8CH7A5121324",
-	"customer_name": "DW Read",
-	"date_time": "2023-02-20 08:30:00",
-	"technician_name": "Arthur the technician",
-	"reason": "Rotate tires"
+    "vin": "1ZVBP8CH7A5121324",
+    "customer_name": "DW Read",
+    "date_time": "2023-02-20 08:30:00",
+    "technician_name": "Arthur the technician",
+    "reason": "Rotate tires"
 }
 ```
 
