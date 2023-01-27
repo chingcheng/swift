@@ -4,8 +4,11 @@ Team:
 <table>
 <tr>
 <td>
-* Ching Cheng - Automobile Service
-* Lynn Lyu - Auto Sales
+
+* Ching Cheng -  Service Microservice
+
+* Lynn Lyu - Sales Microservice
+
 </td>
 </tr>
 </table>
@@ -129,7 +132,7 @@ Sales microservice has four models: AutomobileVO, SalesPerson, PotentialCustomer
 #### POST request to http://localhost:8090/api/salesrecord/
 ```sh
 {
-	"automobile": "4Y1SL65848Z411439",
+    "automobile": "4Y1SL65848Z411439",
 	"salesperson": "Flower H",
 	"customer":"5",
 	"price": 1999
