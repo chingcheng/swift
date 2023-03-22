@@ -50,18 +50,18 @@ function MainPage() {
         </div>
         <div className="col-lg-10 mx-auto container">
           <p className="mb-4 text-center roboto-mono">
-            Welcome to Swift! The premiere solution to managing your automobile dealership inventory, service, and sales departments.
+            Welcome to Swift! This is the place to manage your automobile dealership inventory, service, and sales departments.
           </p>
         </div>
     <div className="container">
     <Row>
       <Col sm>
-        <Card style={{ width: 'auto', height: '525px'}}>
+        <Card style={{ width: 'auto' }}>
       <Card.Img variant="top" src="https://images.unsplash.com/photo-1526996292069-fe119340a058?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
       <Card.Body>
         <Card.Title>Inventory</Card.Title>
         <Card.Text className="card-font">
-          Check your current inventory stock. Includes details about make, models, and automobiles.
+          Check your current inventory stock. Add and view details about manufacturers, models, and automobiles.
         </Card.Text>
         <div className="pt-1 pb-1">
         <Button
@@ -75,12 +75,12 @@ function MainPage() {
     </Card>
         </Col>
         <Col sm>
-        <Card style={{ width: 'auto', height: '525px' }}>
+        <Card style={{ width: 'auto' }}>
       <Card.Img variant="top" src="https://images.unsplash.com/photo-1591439346018-9d5df732ab7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" />
       <Card.Body>
         <Card.Title>Sales</Card.Title>
         <Card.Text>
-          Manage your sales department information here. Add a salesperson, customer, and sales record. View your dealership's sales records by salesperson.
+          Add and view salespeople, customers, and sales record. View your dealership's sales records by salesperson.
         </Card.Text>
         <Button
           className="tan-btn"
@@ -93,7 +93,7 @@ function MainPage() {
         </Col>
         <Col sm>
         <Card
-        style={{ width: 'auto', height: '525px' }}>
+        style={{ width: 'auto' }}>
       <Card.Img variant="top" src="https://images.unsplash.com/photo-1507578319882-cb1a3b5e72a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
       <Card.Body>
         <Card.Title>Service</Card.Title>
