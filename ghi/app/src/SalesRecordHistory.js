@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Table from 'react-bootstrap/Table';
+
 
 export default function SalesRecordHistory(salesrecords) {
 
@@ -10,7 +12,9 @@ export default function SalesRecordHistory(salesrecords) {
 
     return (
     <>
-        <h1>Sales Person History</h1>
+    <div className='pt-5 pb-4 text-left'>
+        <h1 className='mb-3 text-center'>Sales Person History</h1>
+        </div>
         <div className="mb-3">
             <select value={name} onChange={handleNameChange} required id="name" name="name" className="form-select">
                 <option value="">Choose a sales person</option>
@@ -23,7 +27,7 @@ export default function SalesRecordHistory(salesrecords) {
                     })}
             </select>
         </div>
-        <table className="table table-striped">
+        <Table striped bordered hover>
             <thead>
                 <tr>
                     <th>Sales Person</th>
@@ -45,7 +49,7 @@ export default function SalesRecordHistory(salesrecords) {
                     );
                 })}
             </tbody>
-        </table>
+        </Table>
     </>
     )
 }

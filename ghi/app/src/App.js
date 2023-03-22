@@ -129,55 +129,58 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <><BrowserRouter>
       <Nav />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
       <div className="container">
 
         <Routes>
-          <Route path="/" element={<MainPage />} />
 
           <Route path="manufacturers">
             <Route path="" element={<ManufacturersList manufacturers={manufacturers} getManufacturers={getManufacturers} />} />
-            <Route path="new" element={<ManufacturerForm getManufacturers={getManufacturers} />}/>
+            <Route path="new" element={<ManufacturerForm getManufacturers={getManufacturers} />} />
           </Route>
 
           <Route path="models">
-            <Route path="" element={<ModelsList models={models} getModels={getModels} />}/>
-            <Route path="new" element={<ModelForm getModels={getModels} manufacturers={manufacturers}/>}/>
+            <Route path="" element={<ModelsList models={models} getModels={getModels} />} />
+            <Route path="new" element={<ModelForm getModels={getModels} manufacturers={manufacturers} />} />
           </Route>
 
           <Route path="automobiles">
             <Route path="" element={<AutomobileList />} />
-            <Route path="new" element={<AutomobileForm fetchAutomobiles={fetchAutomobiles} models={models}/>} />
+            <Route path="new" element={<AutomobileForm fetchAutomobiles={fetchAutomobiles} models={models} />} />
           </Route>
 
           <Route path="appointments">
-            <Route path="" element={<AppointmentsList appointments={appointments} getAppointments={getAppointments} />}/>
-            <Route path="new" element={<AppointmentForm getAppointments={getAppointments} technicians={technicians} />}/>
-            <Route path="history"  element={<ServiceHistory appointments={appointments} setAppointments={setAppointments}/>}/>
+            <Route path="" element={<AppointmentsList appointments={appointments} getAppointments={getAppointments} />} />
+            <Route path="new" element={<AppointmentForm getAppointments={getAppointments} technicians={technicians} />} />
+            <Route path="history" element={<ServiceHistory appointments={appointments} setAppointments={setAppointments} />} />
           </Route>
 
           <Route path="technicians">
-            <Route path="" element={<TechniciansList technicians={technicians} getTechnicians={getTechnicians} />}/>
-            <Route path="new" element={<TechnicianForm getTechnicians={getTechnicians}/>} />
+            <Route path="" element={<TechniciansList technicians={technicians} getTechnicians={getTechnicians} />} />
+            <Route path="new" element={<TechnicianForm getTechnicians={getTechnicians} />} />
           </Route>
 
           <Route path="salesrecords">
             <Route path="" element={<SalesRecordList salesrecord={salesrecords} />} />
-            <Route path="new" element={<SalesRecordForm automobiles={automobiles} salesperson={salesperson} customer={customer} fetchSalesRecord={fetchSalesRecord} fetchAutomobiles={fetchAutomobiles}/>} />
-            <Route path="history" element={<SalesRecordHistory salesrecords={salesrecords} salesperson={salesperson}/>} />
+            <Route path="new" element={<SalesRecordForm automobiles={automobiles} salesperson={salesperson} customer={customer} fetchSalesRecord={fetchSalesRecord} fetchAutomobiles={fetchAutomobiles} />} />
+            <Route path="history" element={<SalesRecordHistory salesrecords={salesrecords} salesperson={salesperson} />} />
           </Route>
 
           <Route path="salesperson">
-            <Route path="new" element={<SalesPersonForm fetchSalesperson={fetchSalesperson}/>} />
+            <Route path="new" element={<SalesPersonForm fetchSalesperson={fetchSalesperson} />} />
           </Route>
           <Route path="customer">
-            <Route path="new" element={<CustomerForm fetchCustomer={fetchCustomer}/>} />
+            <Route path="new" element={<CustomerForm fetchCustomer={fetchCustomer} />} />
           </Route>
 
         </Routes>
       </div>
     </BrowserRouter>
+    </>
   );
 }
 export default App;

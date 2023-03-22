@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Table from 'react-bootstrap/Table';
+
 
 export default function ServiceHistory({ appointments, setAppointments }) {
 
@@ -26,7 +28,7 @@ export default function ServiceHistory({ appointments, setAppointments }) {
             <button type="submit" className="btn btn-primary">search</button>
             </form>
             <h1 className="mb-3 mt-3 text-center">Service History</h1>
-          <table className="table table-striped table-hover">
+          <Table striped bordered hover>
               <thead>
               <tr>
                   <th>VIN</th>
@@ -49,6 +51,7 @@ export default function ServiceHistory({ appointments, setAppointments }) {
                             <img
                             src="https://cdn-icons-png.flaticon.com/128/6941/6941697.png"
                             width="25px"
+                            alt=""
                             />
                             :""}</td>
                       <td>{ new Date(appointment.date_time).toLocaleDateString("en-US") }</td>
@@ -62,18 +65,20 @@ export default function ServiceHistory({ appointments, setAppointments }) {
                             <img
                             src="https://cdn-icons-png.flaticon.com/512/845/845646.png"
                             width="25px"
+                            alt=""
                             />
                             :
                             <img
                             src="https://cdn-icons-png.flaticon.com/512/463/463575.png"
                             width="25px"
+                            alt=""
                             />
                             } </td>
                   </tr>
                   );
               })}
               </tbody>
-          </table>
+          </Table>
       </>
     )
 }

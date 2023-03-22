@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap');
+
+
 body {
   margin: 0;
+  font-family: 'Roboto Mono', monospace !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +14,33 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.roboto-mono {
+  font-family: 'Roboto Mono', monospace;
+  font-size: large;
+}
+
+.card-font {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.tan-btn {
+  background-color: #BDA79E;
+  border-color: #BDA79E;
+}
+
+.tan-btn:hover {
+  background-color: #795F53;
+  border-color: #795F53;
+}
+
+.tan-btn:focus {
+  background-color: #795F53;
+  border-color: #795F53;
+}
+
+.tan-btn:active {
+  background-color: #795F53;
+  border-color: #795F53;
 }

@@ -1,3 +1,5 @@
+import Table from 'react-bootstrap/Table';
+
 export default function AppointmentsList( {appointments, getAppointments } ) {
 
     const cancelAppointment = async (appointment) => {
@@ -33,8 +35,8 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
       <div className='p-5 text-left'>
         <h1 className='mb-3 text-center'>Service appointments</h1>
         </div>
-        <table className="table table-striped table-hover">
-            <thead>
+        <Table striped bordered hover>
+        <thead>
             <tr>
                 <th>VIN</th>
                 <th>Customer name</th>
@@ -57,6 +59,7 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
                             <img
                             src="https://cdn-icons-png.flaticon.com/128/6941/6941697.png"
                             width="25px"
+                            alt=""
                             />
                             :""}</td>
                     <td>{ new Date(appointment.date_time).toLocaleDateString("en-US") }</td>
@@ -84,7 +87,7 @@ export default function AppointmentsList( {appointments, getAppointments } ) {
                 );
             })}
             </tbody>
-        </table>
+        </Table>
     </>
     );
 }

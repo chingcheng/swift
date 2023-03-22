@@ -19,30 +19,33 @@ const AutomobileList = () => {
 	}, []);
 
 	return (
-		<table className="table table-striped mt-4 table-hover">
-			<thead>
-				<tr>
-					<th>VIN</th>
-					<th>Color</th>
-					<th>Year</th>
-					<th>Model</th>
-					<th>Manufacturer</th>
-				</tr>
-			</thead>
-			<tbody>
-				{automobileList.map((automobile) => {
-					return (
-						<tr className="table-row" key={automobile.id}>
-							<td>{automobile.vin}</td>
-							<td>{automobile.color}</td>
-							<td>{automobile.year}</td>
-							<td>{automobile.model.name}</td>
-							<td>{automobile.model.manufacturer.name}</td>
-						</tr>
-					);
-				})}
-			</tbody>
-		</table>
+		<>
+		<div className='pt-5 pb-4 text-left'>
+			<h1 className='mb-3 text-center'>Automobiles</h1>
+		</div><table className="table table-striped mt-4 table-hover">
+				<thead>
+					<tr>
+						<th>VIN</th>
+						<th>Color</th>
+						<th>Year</th>
+						<th>Model</th>
+						<th>Manufacturer</th>
+					</tr>
+				</thead>
+				<tbody>
+					{automobileList.map((automobile) => {
+						return (
+							<tr className="table-row" key={automobile.id}>
+								<td>{automobile.vin}</td>
+								<td>{automobile.color}</td>
+								<td>{automobile.year}</td>
+								<td>{automobile.model.name}</td>
+								<td>{automobile.model.manufacturer.name}</td>
+							</tr>
+						);
+					})}
+				</tbody>
+			</table></>
 	);
 };
 export default AutomobileList;

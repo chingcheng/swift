@@ -1,3 +1,5 @@
+import Table from 'react-bootstrap/Table';
+
 export default function ModelsList({ models, getModels }) {
     const deleteModel = async (model) => {
         const url = `http://localhost:8100/api/models/${model.id}/`
@@ -14,10 +16,10 @@ export default function ModelsList({ models, getModels }) {
 
     return (
         <>
-        <div className='p-5 text-left'>
+        <div className='pt-5 pb-4 text-left'>
           <h1 className='mb-3 text-center'>Vehicle Models</h1>
           </div>
-          <table className="table table-striped table-hover">
+          <Table striped bordered hover>
               <thead>
               <tr>
                   <th>Name</th>
@@ -51,7 +53,7 @@ export default function ModelsList({ models, getModels }) {
                   );
               })}
               </tbody>
-          </table>
+          </Table>
       </>
     )
 }

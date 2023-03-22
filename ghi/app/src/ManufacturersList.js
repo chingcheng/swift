@@ -1,3 +1,5 @@
+import Table from 'react-bootstrap/Table';
+
 export default function ManufacturersList({ manufacturers }) {
 
     if (manufacturers === undefined) {
@@ -6,10 +8,10 @@ export default function ManufacturersList({ manufacturers }) {
 
     return (
         <>
-        <div className='p-5 text-left bg-light'>
+        <div className='pt-5 pb-4 text-left'>
           <h1 className='mb-3 text-center'>Manufacturers</h1>
           </div>
-          <table className="table table-striped table-hover">
+          <Table striped bordered hover>
               <thead>
               <tr>
                   <th>Name</th>
@@ -24,7 +26,7 @@ export default function ManufacturersList({ manufacturers }) {
                   );
               })}
               </tbody>
-          </table>
+          </Table>
       </>
     )
 }

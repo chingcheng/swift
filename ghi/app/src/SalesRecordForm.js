@@ -46,7 +46,7 @@ function SalesRecordForm(props) {
 
         const response = await fetch(salesRecordUrl, fetchOptions);
         if (response.ok) {
-            const salesRecord = await response.json();
+            await response.json();
             setFormAutomobile("");
             setFormSalesperson("");
             setFormCustomer("");
