@@ -4,7 +4,7 @@ import yellow_van from "./images/yellow_van.jpeg"
 import black_car from "./images/black_car.avif"
 import black_cooper from "./images/black_cooper.avif"
 import Carousel from 'react-bootstrap/Carousel';
-import { useState } from "react";
+import { useState, Link} from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -63,12 +63,14 @@ function MainPage() {
         <Card.Text className="card-font">
           Check your current inventory stock. Includes details about make, models, and automobiles.
         </Card.Text>
+        <div className="pt-1 pb-1">
         <Button
           className="tan-btn"
-          style={{position:"absolute", bottom: "0"}}
+          href="/automobiles"
           >
           See current inventory
         </Button>
+        </div>
       </Card.Body>
     </Card>
         </Col>
@@ -80,7 +82,12 @@ function MainPage() {
         <Card.Text>
           Manage your sales department information here. Add a salesperson, customer, and sales record. View your dealership's sales records by salesperson.
         </Card.Text>
-        <Button className="tan-btn">See sales records</Button>
+        <Button
+          className="tan-btn"
+          href="/salesrecords"
+        >
+        See sales records
+        </Button>
       </Card.Body>
     </Card>
         </Col>
@@ -93,7 +100,12 @@ function MainPage() {
         <Card.Text>
           Schedule new service appointments, add a technician, and view service appointments by VIN number.
         </Card.Text>
-        <Button className="tan-btn">See service appointments</Button>
+        <Button
+          className="tan-btn"
+          href="/appointments"
+        >
+        See service appointments
+        </Button>
       </Card.Body>
     </Card>
         </Col>
